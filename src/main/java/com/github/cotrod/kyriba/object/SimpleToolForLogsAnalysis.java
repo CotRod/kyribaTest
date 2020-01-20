@@ -113,8 +113,7 @@ public class SimpleToolForLogsAnalysis {
                     }
                     if (filter.getFromDate() != null) {
                         String sdate = getStringDate(line);
-                        if (!(LocalDate.parse(sdate, DateTimeFormatter.ofPattern(datePattern)).isAfter(filter.getFromDate()) &&
-                                LocalDate.parse(sdate, DateTimeFormatter.ofPattern(datePattern)).isBefore(filter.getToDate()))) {
+                        if (!isCorrectDate(filter, sdate)) {
                             continue;
                         }
                     }
@@ -124,5 +123,11 @@ public class SimpleToolForLogsAnalysis {
                 e.printStackTrace();
             }
         };
+    }
+
+    private static boolean isCorrectDate(FilterForAnalysis filter, String sdate) {
+        LocalDate date = LocalDate.parse(sdate, DateTimeFormatter.ofPattern(datePattern));
+        return (date.isAfter(filter.getFromDate()) || date.isEqual(filter.getFromDate())) &&
+                (date.isBefore(filter.getToDate()) || date.isEqual(filter.getToDate()));
     }
 }

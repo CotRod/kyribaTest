@@ -26,7 +26,7 @@ public class Utils {
             if (filter.hasFilter()) {
                 System.out.println("4 - Continue");
             }
-            choice = sc.nextInt();
+            choice = Integer.parseInt(sc.nextLine());
         } while (choice != 1 && choice != 2 && choice != 3 && choice != 4);
         return choice;
     }
@@ -41,14 +41,14 @@ public class Utils {
                 System.out.println("Input Date (fromDate) in " + datePattern + " : ");
                 filter.setFromDate(LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern(datePattern)));
                 System.out.println("Input Date (toDate) in " + datePattern + " : ");
-                filter.setFromDate(LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern(datePattern)));
+                filter.setToDate(LocalDate.parse(sc.nextLine(), DateTimeFormatter.ofPattern(datePattern)));
                 break;
             case 3:
                 do {
                     System.out.println("Choose type of logs");
                     System.out.println("1 - WARNING");
                     System.out.println("2 - ERROR");
-                    choice = sc.nextInt();
+                    choice = Integer.parseInt(sc.nextLine());
                 } while (choice != 1 && choice != 2);
                 filter.setTypeOfMessage(TypeOfMessage.valueOf(choice == 1 ? "WARNING" : "ERROR"));
                 break;
@@ -65,7 +65,7 @@ public class Utils {
             if (groupParams.hasGroupParam()) {
                 System.out.println("3 - Continue");
             }
-            choice = sc.nextInt();
+            choice = Integer.parseInt(sc.nextLine());
         } while (choice != 1 && choice != 2 && choice != 3);
         return choice;
     }
@@ -80,12 +80,12 @@ public class Utils {
 
     public static int getAmountOfThreads() {
         System.out.println("Set amount of threads (input 1 to use default value == 1 or 2 to use thread for each file)");
-        int value = sc.nextInt();
+        int value = Integer.parseInt(sc.nextLine());
         return Math.max(value, 1);
     }
 
     public static String getFileName() {
         System.out.println("Input a file name (with extends, for ex file.txt) : ");
-        return sc.next();
+        return sc.nextLine();
     }
 }
